@@ -2,542 +2,203 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SaludCompare — Prototipo funcional</title>
-<style>
-:root{
-  --ink:#121a24; --muted:#6c7a8f; --bg:#0b111a; --card:#0f1724;
-  --line:#1b2a40; --brand:#0b63e5; --accent:#19a058; --warn:#f0b429;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:linear-gradient(180deg,#0a1018,#0b121c 60%,#0a121e);color:#eaf1ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
-a{color:inherit}
-header{position:sticky;top:0;z-index:50;display:flex;gap:12px;align-items:center;padding:14px 16px;background:#0e1522cc;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-header b{font-size:18px;letter-spacing:.2px}
-#viewTitle{color:#c7d6ee}
-.container{max-width:980px;margin:18px auto;padding:0 14px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
-h2{margin:6px 0 10px;font-size:20px}
-h3{margin:4px 0 8px;font-size:16px;color:#cfe1ff}
-p{margin:4px 0 8px;color:#c6d2e6}
-label{font-size:14px;color:#cfe1ff}
-select,input,button,textarea{font:inherit}
-input,select{background:#0b1422;border:1px solid var(--line);color:#eaf1ff;border-radius:12px;padding:10px 12px}
-button{background:#152540;border:1px solid #203454;color:#fff;border-radius:12px;padding:10px 14px;cursor:pointer}
-button:hover{filter:brightness(1.1)}
-.btn-primary{background:var(--brand);border-color:#1b5dd1}
-.btn-accent{background:var(--accent);border-color:#0b8a4c}
-.btn-muted{background:#17263d;border-color:#223655;color:#d6e6ff}
-.tag{display:inline-flex;align-items:center;gap:6px;background:#0f1c30;border:1px solid #1a2941;border-radius:999px;padding:6px 10px;font-size:12px;color:#cfe2ff}
-hr{border:none;border-top:1px solid var(--line);margin:12px 0}
-.menu-card{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#0d1626}
-.menu-card h4{margin:0 0 4px;font-size:16px}
-.menu-card p{margin:0;color:#b7c7e1}
-.badge{font-size:12px;background:#0f2038;border:1px solid #1f3357;padding:4px 8px;border-radius:999px;color:#a9c6ff}
-.checkbox{width:22px;height:22px;border-radius:6px;border:2px solid #24426b;display:grid;place-content:center}
-.checkbox input{appearance:none;width:18px;height:18px;border-radius:4px;outline:none;border:1px solid #2a4d7e;background:#0b1422}
-.checkbox input:checked{background:var(--accent);border-color:#0b8a4c}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
-.kv{display:grid;grid-template-columns:140px 1fr;gap:8px;font-size:14px}
-.kv div{padding:6px 8px;background:#0f1b2d;border:1px solid var(--line);border-radius:10px}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{border:1px solid var(--line);padding:8px 10px;text-align:left;background:#0f1829}
-.table th{background:#122038}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-.slot{min-height:90px;background:#0e1729;border:1px dashed #2a4166;border-radius:10px;padding:8px;font-size:13px}
-.footer-nav{position:fixed;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:8px}
-.footer-nav button{padding:10px 12px}
-small{color:#a9b9d3}
-@media (max-width:720px){
-  .grid-1-1{grid-template-columns:1fr}
-}
-.hidden{display:none !important}
-</style>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SaludCompare — Móvil</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B63E5" id="themeColorMeta">
-
+<meta name="theme-color" content="#0B63E5">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+:root{--ink:#0e1726;--muted:#6f7d93;--bg:#0b111a;--card:#0f1724;--line:#1b2a40;--brand:#0b63e5;--accent:#19a058;--safe:env(safe-area-inset-bottom)}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:#0a1018;color:#eaf1ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
+.container{max-width:480px;margin:0 auto;padding:12px 12px 92px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}
+h1{font-size:20px;margin:10px 0 6px}h2{font-size:18px;margin:8px 0}h3{font-size:16px;margin:6px 0;color:#cfe1ff}p{margin:6px 0;color:#c6d2e6}
+label{font-size:15px}input,select,button{font:inherit}
+input,select{width:100%;background:#0b1422;border:1px solid var(--line);color:#eaf1ff;border-radius:12px;padding:12px 14px}
+button{background:#152540;border:1px solid #203454;color:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;width:100%}button:active{transform:scale(.99)}
+.btn-primary{background:var(--brand);border-color:#1b5dd1}.btn-accent{background:var(--accent);border-color:#0b8a4c}.btn-muted{background:#13233c;border-color:#1a2f4e}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px}.toolbar>*{flex:1 1 48%}
+.badge{display:inline-block;font-size:12px;background:#0f2038;border:1px solid #1f3357;padding:6px 8px;border-radius:999px;color:#a9c6ff}
+.menu-card{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#0d1626;margin:10px 0}
+.menu-card h4{margin:0 0 6px;font-size:16px}.menu-card p{margin:0;color:#b7c7e1}
+.table{width:100%;border-collapse:collapse}.table th,.table td{border:1px solid var(--line);padding:8px 10px;text-align:left;background:#0f1829}.table th{background:#122038}
+.week{display:grid;grid-template-columns:1fr 1fr;gap:8px}.slot{min-height:90px;background:#0e1729;border:1px dashed #2a4166;border-radius:10px;padding:8px;font-size:13px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:#0e1522;backdrop-filter:blur(8px);border-top:1px solid #1b2a40;display:flex;gap:4px;padding:8px 10px calc(8px + var(--safe))}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:#cbd8ee;background:transparent;border:none}
+.tab.active{color:#fff}.hide{display:none!important}
+@media(min-width:520px){.container{max-width:640px}.week{grid-template-columns:repeat(4,1fr)}}
+</style>
 </head>
 <body>
-<header>
-  <b>SaludCompare</b>
-  <span id="viewTitle">Splash</span>
-  <span style="margin-left:auto"></span>
-  <button class="btn-muted" onclick="goto('inicio')">Inicio</button>
-  <button class="btn-muted" onclick="goto('comparar')">Comparar</button>
-  <button class="btn-muted" onclick="goto('detalle')">Detalle</button>
-  <button class="btn-muted" onclick="goto('lonchera')">Lonchera</button>
-  <button class="btn-muted" onclick="goto('lista')">Compras</button>
-  <button class="btn-muted" onclick="goto('plan')">Plan</button>
-  <button class="btn-muted" onclick="goto('perfil')">Perfil</button>
-</header>
-
 <div class="container">
+  <section id="v-splash" class="card">
+    <h1>SaludCompare</h1>
+    <p>Comparador de menús saludables y creador de loncheras — versión móvil.</p>
+    <button class="btn-primary" onclick="nav('inicio')">Comenzar</button>
+  </section>
 
-  <!-- SPLASH -->
-  <section id="view-splash" class="card">
-    <h2>1. Bienvenida</h2>
-    <p>Tu aliado para comparar menús saludables y crear loncheras nutritivas.</p>
+  <section id="v-inicio" class="card hide">
+    <h2>¿Para quién?</h2>
     <div class="toolbar">
-      <button class="btn-primary" onclick="goto('inicio')">Comenzar</button>
+      <label><input type="radio" name="aud" value="Niños" checked> Niños</label>
+      <label><input type="radio" name="aud" value="Adolescente"> Adolescente</label>
+      <label><input type="radio" name="aud" value="Adulto"> Adulto</label>
+      <label><input type="radio" name="aud" value="Familiar"> Familiar</label>
     </div>
-    <small>Tip: usa la barra superior para navegar las vistas del prototipo.</small>
+    <h3>Restricciones</h3>
+    <div class="toolbar">
+      <label><input type="checkbox" id="r_gluten"> Sin gluten</label>
+      <label><input type="checkbox" id="r_lactosa" checked> Sin lactosa</label>
+      <label><input type="checkbox" id="r_veg"> Vegetariano</label>
+    </div>
+    <h3>Objetivo calórico</h3>
+    <input type="range" id="kcal" min="1000" max="2500" step="50" value="1400" oninput="kOut.textContent=this.value">
+    <p><span class="badge"><span id="kOut">1400</span> kcal/día</span></p>
+    <button class="btn-primary" onclick="nav('comparar')">Ver menús recomendados</button>
   </section>
 
-  <!-- INICIO -->
-  <section id="view-inicio" class="card hidden">
-    <h2>2. Inicio / Objetivo y restricciones</h2>
-    <div class="grid grid-1-1" style="grid-template-columns:1fr 1fr">
-      <div class="card">
-        <h3>¿Para quién?</h3>
-        <div class="toolbar">
-          <label><input type="radio" name="aud" value="niños" checked> Niños</label>
-          <label><input type="radio" name="aud" value="adolescente"> Adolescente</label>
-          <label><input type="radio" name="aud" value="adulto"> Adulto</label>
-          <label><input type="radio" name="aud" value="familiar"> Familiar</label>
-        </div>
-        <h3>Restricciones</h3>
-        <div class="toolbar">
-          <label><input type="checkbox" id="r_gluten"> Sin gluten</label>
-          <label><input type="checkbox" id="r_lactosa" checked> Sin lactosa</label>
-          <label><input type="checkbox" id="r_veg"> Vegetariano</label>
-        </div>
-        <h3>Objetivo calórico</h3>
-        <div class="toolbar">
-          <input type="range" id="kcal" min="1000" max="2500" step="50" value="1400" oninput="kcalOut.textContent=this.value">
-          <span class="tag"><span id="kcalOut">1400</span> kcal/día</span>
-        </div>
-        <button class="btn-primary" onclick="goto('comparar')">Ver menús recomendados</button>
-      </div>
-      <div class="card">
-        <h3>Resumen de preferencias</h3>
-        <div class="kv">
-          <div>Audiencia</div><div id="prefAud">Niños</div>
-          <div>Restricciones</div><div id="prefRest">Sin lactosa</div>
-          <div>Calorías objetivo</div><div><span id="prefKcal">1400</span> kcal/día</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARAR -->
-  <section id="view-comparar" class="card hidden">
-    <h2>3. Comparar menús</h2>
-    <p>Selecciona <b>2</b> menús para comparar por nutrición, costo y tiempo.</p>
+  <section id="v-comparar" class="card hide">
+    <h2>Selecciona 2 menús</h2>
     <div id="menus"></div>
-    <div class="toolbar">
-      <button class="btn-accent" id="btnCompare" onclick="compareSelected()" disabled>Comparar seleccionados (0)</button>
-      <button class="btn-primary" onclick="goto('detalle')">Ver detalle del último seleccionado</button>
-    </div>
+    <button id="btnCompare" class="btn-accent" onclick="compare()" disabled>Comparar (0)</button>
   </section>
 
-  <!-- DETALLE -->
-  <section id="view-detalle" class="card hidden">
-    <h2>4. Detalle del menú</h2>
-    <div id="detalleBox"></div>
-    <div class="toolbar">
-      <label>Día: <select id="daySelect"></select></label>
-      <label>Comida: 
-        <select id="mealSelect">
-          <option>Desayuno</option><option>Almuerzo</option><option>Merienda</option><option>Cena</option>
-        </select>
-      </label>
-      <button class="btn-primary" onclick="addToPlan()">Agregar al plan</button>
-      <button onclick="goto('lista')">Ver lista de compras</button>
+  <section id="v-detalle" class="card hide">
+    <h2 id="d-titulo">Detalle</h2>
+    <div id="d-info"></div>
+    <div class="toolbar" style="margin-top:8px">
+      <select id="daySel"></select>
+      <select id="mealSel">
+        <option>Desayuno</option><option>Almuerzo</option><option>Merienda</option><option>Cena</option>
+      </select>
     </div>
+    <button class="btn-primary" onclick="addToPlan()">Agregar al plan</button>
   </section>
 
-  <!-- LONCHERA -->
-  <section id="view-lonchera" class="card hidden">
-    <h2>5. Crear lonchera</h2>
-    <p>Arma una lonchera equilibrada: 1 proteína + 1 carbo complejo + 1 fruta/verdura + 1 lácteo/alternativa.</p>
-    <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:10px">
-      <div class="slot" id="slot-prot">Proteína</div>
-      <div class="slot" id="slot-carb">Carbo complejo</div>
-      <div class="slot" id="slot-frut">Fruta / verdura</div>
-      <div class="slot" id="slot-lact">Lácteo / alt.</div>
-    </div>
-    <h3>Sugerencias</h3>
-    <div class="toolbar" id="sugs"></div>
-    <div class="toolbar">
-      <button class="btn-primary" onclick="saveLunchbox()">Guardar lonchera</button>
-    </div>
+  <section id="v-plan" class="card hide">
+    <h2>Plan semanal</h2>
+    <div class="week" id="grid"></div>
+    <button class="btn-muted" onclick="clearPlan()">Limpiar plan</button>
   </section>
 
-  <!-- LISTA DE COMPRAS -->
-  <section id="view-lista" class="card hidden">
-    <h2>6. Lista de compras (semanal)</h2>
-    <table class="table" id="tblCompras"></table>
-    <div class="toolbar">
-      <button class="btn-primary" onclick="window.print()">Imprimir / PDF</button>
-    </div>
+  <section id="v-lista" class="card hide">
+    <h2>Lista de compras</h2>
+    <table class="table" id="tbl"></table>
   </section>
 
-  <!-- PLAN SEMANAL -->
-  <section id="view-plan" class="card hidden">
-    <h2>7. Plan semanal</h2>
-    <div class="week" id="weekGrid"></div>
-    <div class="toolbar">
-      <button class="btn-primary" onclick="goto('lista')">Generar lista de compras</button>
-      <button class="btn-muted" onclick="clearPlan()">Limpiar plan</button>
-    </div>
+  <section id="v-perfil" class="card hide">
+    <h2>Perfil</h2>
+    <label>Alergias</label><input id="pfA" placeholder="Lactosa, Gluten">
+    <label style="margin-top:8px">Presupuesto semanal (S/)</label><input id="pfP" type="number" value="150">
+    <label style="margin-top:8px">Preferencias</label><input id="pfPr" placeholder="Pollo, Pavo, Pescado">
+    <button class="btn-primary" onclick="savePrefs()">Guardar</button>
   </section>
-
-  <!-- PERFIL -->
-  <section id="view-perfil" class="card hidden">
-    <h2>8. Perfil y preferencias</h2>
-    <div class="grid grid-1-1" style="grid-template-columns:1fr 1fr">
-      <div class="card">
-        <label>Alergias</label>
-        <input id="pfAlergias" placeholder="Lactosa, Gluten">
-        <label style="margin-top:8px">Presupuesto semanal (S/)</label>
-        <input id="pfPres" type="number" value="150">
-        <label style="margin-top:8px">Preferencias</label>
-        <input id="pfPrefs" placeholder="Pollo, Pavo, Pescado">
-        <div class="toolbar"><button class="btn-primary" onclick="savePrefs()">Guardar preferencias</button></div>
-      </div>
-      <div class="card">
-        <h3>Resumen</h3>
-        <div id="perfilOut" class="kv"></div>
-      </div>
-    </div>
-  </section>
-
 </div>
 
-<div class="footer-nav">
-  <button onclick="goto('splash')">1</button>
-  <button onclick="goto('inicio')">2</button>
-  <button onclick="goto('comparar')">3</button>
-  <button onclick="goto('detalle')">4</button>
-  <button onclick="goto('lonchera')">5</button>
-  <button onclick="goto('lista')">6</button>
-  <button onclick="goto('plan')">7</button>
-  <button onclick="goto('perfil')">8</button>
-</div>
+<nav class="tabbar">
+  <button class="tab" id="t-inicio" onclick="nav('inicio')">Inicio</button>
+  <button class="tab" id="t-comparar" onclick="nav('comparar')">Comparar</button>
+  <button class="tab" id="t-plan" onclick="nav('plan')">Plan</button>
+  <button class="tab" id="t-lista" onclick="nav('lista')">Compras</button>
+  <button class="tab" id="t-perfil" onclick="nav('perfil')">Perfil</button>
+</nav>
 
 <script>
-// ----- Datos de ejemplo -----
-const MENUS = [
-  {
-    id:'A', nombre:'Arroz con pollo fit', kcal:450, prote:28, azucar:6, sodio:480,
-    costo:8.5, tiempo:35,
-    ingredientes:[['Pechuga de pollo',300,'g'],['Arroz integral',200,'g'],['Espinaca',100,'g'],['Zanahoria',100,'g']],
-    pasos:['Sazonar y dorar pollo','Hervir arroz integral','Saltear verduras','Mezclar y servir'],
-    etiquetas:['Popular','Sin lactosa']
-  },
-  {
-    id:'B', nombre:'Tallarines integrales con pollo', kcal:520, prote:26, azucar:7, sodio:520,
-    costo:7.8, tiempo:30,
-    ingredientes:[['Pasta integral',200,'g'],['Pechuga de pollo',250,'g'],['Tomate',120,'g'],['Aceite de oliva',10,'ml']],
-    pasos:['Hervir pasta','Saltear pollo','Salsa de tomate rápida','Unir y emplatar'],
-    etiquetas:['Más barato']
-  },
-  {
-    id:'C', nombre:'Quinoa + ensalada y pechuga', kcal:430, prote:32, azucar:5, sodio:420,
-    costo:9.2, tiempo:25,
-    ingredientes:[['Quinoa',180,'g'],['Pechuga de pollo',250,'g'],['Lechuga',100,'g'],['Zanahoria',80,'g'],['Yogur sin lactosa',100,'g']],
-    pasos:['Cocinar quinoa','Planchar pechuga','Ensalada fresca','Aderezo con yogur SL'],
-    etiquetas:['Sin lactosa']
-  }
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js')); }
+
+const MENUS=[
+ {id:'A',n:'Arroz con pollo fit',k:450,p:28,az:6,na:480,c:8.5,t:35,ing:[['Pechuga',300,'g'],['Arroz integral',200,'g'],['Espinaca',100,'g']],pas:['Dorar pollo','Hervir arroz','Mezclar con verduras']},
+ {id:'B',n:'Tallarines integrales + pollo',k:520,p:26,az:7,na:520,c:7.8,t:30,ing:[['Pasta integral',200,'g'],['Pechuga',250,'g']],pas:['Hervir pasta','Saltear pollo','Unir y servir']},
+ {id:'C',n:'Quinoa + ensalada + pechuga',k:430,p:32,az:5,na:420,c:9.2,t:25,ing:[['Quinoa',180,'g'],['Pechuga',250,'g'],['Yogur SL',100,'g']],pas:['Cocinar quinoa','Plancha pechuga','Ensalada y aderezo']}
 ];
+const state={sel:[],last:'A',plan:{}};
 
-const SUGS = {
-  prot: ['Pechuga de pavo','Atún en agua','Hummus'],
-  carb: ['Pan integral','Galletas de avena sin azúcar','Quinoa cocida'],
-  frut: ['Fresas','Manzana','Zanahoria baby'],
-  lact: ['Yogur sin lactosa','Queso fresco sin lactosa','Bebida vegetal']
-};
-
-// ----- Estado -----
-const state = {
-  aud:'Niños',
-  restricciones:['Sin lactosa'],
-  kcal:1400,
-  selected:[],   // ids seleccionados para comparar
-  lastSelected:null, // último menú tocado
-  plan: {}, // { 'Lunes:Almuerzo': menuId }
-  prefs: { alergias:'Lactosa, Gluten', presupuesto:150, preferencias:'Pollo, Pavo, Pescado' },
-  lunchbox: {prot:null, carb:null, frut:null, lact:null}
-};
-
-// ----- Navegación -----
-function goto(view){
-  document.querySelectorAll('section[id^="view-"]').forEach(s=>s.classList.add('hidden'));
-  document.getElementById('view-'+view).classList.remove('hidden');
-  document.getElementById('viewTitle').textContent = view.charAt(0).toUpperCase()+view.slice(1);
-  if(view==='comparar') renderMenuList();
-  if(view==='detalle') renderDetalle(state.lastSelected || MENUS[0].id);
-  if(view==='lista') renderCompras();
+function nav(view){
+  document.querySelectorAll('[id^="v-"]').forEach(e=>e.classList.add('hide'));
+  document.getElementById('v-'+view).classList.remove('hide');
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  const tb=document.getElementById('t-'+view); if(tb) tb.classList.add('active');
+  if(view==='comparar') renderMenus();
+  if(view==='detalle') renderDetalle(state.last);
   if(view==='plan') renderPlan();
-  if(view==='inicio') syncPrefsPreview();
-  if(view==='lonchera') renderSugs();
+  if(view==='lista') renderList();
 }
-function syncPrefsPreview(){
-  document.getElementById('prefAud').textContent = state.aud;
-  document.getElementById('prefRest').textContent = state.restricciones.join(', ') || 'Ninguna';
-  document.getElementById('prefKcal').textContent = state.kcal;
-}
+nav('inicio');
 
-// ----- Inicio handlers -----
-document.querySelectorAll('input[name="aud"]').forEach(r=>r.addEventListener('change', e=>{
-  state.aud = e.target.value.charAt(0).toUpperCase()+e.target.value.slice(1);
-  syncPrefsPreview();
-}));
-['r_gluten','r_lactosa','r_veg'].forEach(id=>{
-  document.getElementById(id).addEventListener('change', ()=>{
-    state.restricciones = [];
-    if(r_gluten.checked) state.restricciones.push('Sin gluten');
-    if(r_lactosa.checked) state.restricciones.push('Sin lactosa');
-    if(r_veg.checked) state.restricciones.push('Vegetariano');
-    syncPrefsPreview();
-  })
-});
-kcal.addEventListener('input', ()=>{ state.kcal = +kcal.value; syncPrefsPreview(); });
-
-// ----- Listado & selección de Menús -----
-function renderMenuList(){
-  const cont = document.getElementById('menus');
-  cont.innerHTML = '';
+function renderMenus(){
+  const c=document.getElementById('menus'); c.innerHTML='';
   MENUS.forEach(m=>{
-    const row = document.createElement('div');
-    row.className = 'menu-card';
-    row.innerHTML = `
-      <div><div class="badge">ID ${m.id}</div></div>
-      <div>
-        <h4>${m.nombre}</h4>
-        <p>${m.kcal} kcal • ${m.prote} g proteína • S/ ${m.costo.toFixed(2)} • ${m.tiempo} min</p>
-        <div class="toolbar">${m.etiquetas.map(t=>`<span class="badge">${t}</span>`).join(' ')}</div>
+    const row=document.createElement('div'); row.className='menu-card';
+    row.innerHTML=`<div>
+      <h4>${m.n}</h4>
+      <p>${m.k} kcal • Prot ${m.p} g • S/ ${m.c.toFixed(2)} • ${m.t} min</p>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <label class="checkbox">
-          <input type="checkbox" ${state.selected.includes(m.id)?'checked':''} onchange="selectMenu('${m.id}', this.checked)">
-        </label>
-        <button class="btn-primary" onclick="goto('detalle'); renderDetalle('${m.id}')">Ver detalle</button>
-      </div>
-    `;
-    cont.appendChild(row);
+      <div style="display:flex;gap:6px">
+        <label><input type="checkbox" onchange="toggleSel('${m.id}',this.checked)" ${state.sel.includes(m.id)?'checked':''}></label>
+        <button class="btn-primary" style="width:auto" onclick="state.last='${m.id}'; nav('detalle')">Detalle</button>
+      </div>`;
+    c.appendChild(row);
   });
   updateCompareBtn();
 }
-function selectMenu(id, checked){
-  state.lastSelected = id;
-  if(checked){
-    if(state.selected.length>=2){ alert('Solo puedes comparar 2 menús a la vez.'); renderMenuList(); return; }
-    if(!state.selected.includes(id)) state.selected.push(id);
-  }else{
-    state.selected = state.selected.filter(x=>x!==id);
-  }
+function toggleSel(id,on){
+  if(on){ if(state.sel.length>=2){ alert('Solo 2 menús'); renderMenus(); return; } if(!state.sel.includes(id)) state.sel.push(id); }
+  else{ state.sel=state.sel.filter(x=>x!==id); }
   updateCompareBtn();
 }
 function updateCompareBtn(){
-  const b = document.getElementById('btnCompare');
-  b.textContent = `Comparar seleccionados (${state.selected.length})`;
-  b.disabled = state.selected.length!==2;
+  const b=document.getElementById('btnCompare'); b.disabled=state.sel.length!==2; b.textContent=`Comparar (${state.sel.length})`;
 }
-function compareSelected(){
-  const [a,b] = state.selected.map(id=>MENUS.find(m=>m.id===id));
-  const table = `
-    <table class="table">
-      <tr><th>Indicador</th><th>${a.nombre}</th><th>${b.nombre}</th></tr>
-      <tr><td>Calorías</td><td>${a.kcal} kcal</td><td>${b.kcal} kcal</td></tr>
-      <tr><td>Proteína</td><td>${a.prote} g</td><td>${b.prote} g</td></tr>
-      <tr><td>Azúcares</td><td>${a.azucar} g</td><td>${b.azucar} g</td></tr>
-      <tr><td>Sodio</td><td>${a.sodio} mg</td><td>${b.sodio} mg</td></tr>
-      <tr><td>Costo estimado</td><td>S/ ${a.costo.toFixed(2)}</td><td>S/ ${b.costo.toFixed(2)}</td></tr>
-      <tr><td>Tiempo</td><td>${a.tiempo} min</td><td>${b.tiempo} min</td></tr>
-    </table>`;
-  alert('Comparación generada. Baja para ver detalles individuales, o entra a Detalle para agregar al plan.');
-  const cont = document.getElementById('menus');
-  const wrap = document.createElement('div');
-  wrap.className='card'; wrap.innerHTML = '<h3>Resultado de la comparación</h3>'+table;
-  cont.prepend(wrap);
+function compare(){
+  const [a,b]=state.sel.map(id=>MENUS.find(m=>m.id===id));
+  alert(`${a.n} vs ${b.n}
+Cal: ${a.k} vs ${b.k}
+Prot: ${a.p} vs ${b.p}
+Tiempo: ${a.t} vs ${b.t}`);
 }
 
-// ----- Detalle -----
 function renderDetalle(id){
-  state.lastSelected = id;
-  const m = MENUS.find(x=>x.id===id);
-  const el = document.getElementById('detalleBox');
-  el.innerHTML = `
-    <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
-      <div class="card">
-        <h3>${m.nombre}</h3>
-        <p>${m.kcal} kcal • Prot ${m.prote} g • Azúcares ${m.azucar} g • Sodio ${m.sodio} mg</p>
-        <div class="toolbar">
-          ${m.etiquetas.map(t=>`<span class="tag">${t}</span>`).join('')}
-        </div>
-        <hr>
-        <h3>Ingredientes</h3>
-        <ul>${m.ingredientes.map(it=>`<li>${it[0]} — ${it[1]} ${it[2]}</li>`).join('')}</ul>
-      </div>
-      <div class="card">
-        <h3>Pasos</h3>
-        <ol>${m.pasos.map(p=>`<li>${p}</li>`).join('')}</ol>
-        <hr>
-        <div class="kv">
-          <div>Costo</div><div>S/ ${m.costo.toFixed(2)}</div>
-          <div>Tiempo</div><div>${m.tiempo} min</div>
-        </div>
-      </div>
-    </div>`;
-  const daySel = document.getElementById('daySelect');
-  if(!daySel.options.length){
-    ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'].forEach(d=>{
-      const o=document.createElement('option'); o.text=d; daySel.add(o);
-    });
-  }
+  const m=MENUS.find(x=>x.id===id);
+  document.getElementById('d-titulo').textContent=m.n;
+  document.getElementById('d-info').innerHTML=`
+    <p>${m.k} kcal • Prot ${m.p} g • Azúcares ${m.az} g • Sodio ${m.na} mg</p>
+    <h3>Ingredientes</h3>
+    <ul>${m.ing.map(i=>`<li>${i[0]} — ${i[1]} ${i[2]}</li>`).join('')}</ul>
+    <h3>Pasos</h3>
+    <ol>${m.pas.map(p=>`<li>${p}</li>`).join('')}</ol>`;
+  const ds=document.getElementById('daySel');
+  if(!ds.options.length){ ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'].forEach(d=>ds.add(new Option(d,d))); }
 }
 
-// ----- Plan semanal -----
 function addToPlan(){
-  const dia = document.getElementById('daySelect').value;
-  const comida = document.getElementById('mealSelect').value;
-  const key = dia+':'+comida;
-  state.plan[key] = state.lastSelected;
-  alert('Agregado al plan: '+key);
-  renderPlan();
+  const d=document.getElementById('daySel').value||'Lunes';
+  const meal=document.getElementById('mealSel').value||'Almuerzo';
+  state.plan[d+':'+meal]=state.last;
+  alert('Agregado al plan.'); renderPlan();
 }
 function renderPlan(){
-  const grid = document.getElementById('weekGrid');
-  grid.innerHTML='';
-  const dias = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
-  dias.forEach(d=>{
-    const box = document.createElement('div'); box.className='slot';
-    const items = ['Desayuno','Almuerzo','Merienda','Cena'].map(meal=>{
-      const id = state.plan[d+':'+meal]; 
-      const txt = id ? `${meal}: ${MENUS.find(m=>m.id===id).nombre}` : `${meal}: —`;
-      return '<div>'+txt+'</div>';
+  const g=document.getElementById('grid'); g.innerHTML='';
+  ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'].forEach(d=>{
+    const box=document.createElement('div'); box.className='slot';
+    const items=['Desayuno','Almuerzo','Merienda','Cena'].map(meal=>{
+      const id=state.plan[d+':'+meal]; const n=id?MENUS.find(x=>x.id===id).n:'—';
+      return `<div>${meal}: ${n}</div>`;
     }).join('');
-    box.innerHTML = `<b>${d}</b><hr>${items}`;
-    grid.appendChild(box);
+    box.innerHTML=`<b>${d}</b><hr>${items}`;
+    g.appendChild(box);
   });
 }
-
-// ----- Lista de compras -----
-function renderCompras(){
-  const map = new Map();
+function clearPlan(){ state.plan={}; renderPlan(); }
+function renderList(){
+  const map=new Map();
   Object.values(state.plan).forEach(id=>{
-    const m = MENUS.find(x=>x.id===id);
-    m.ingredientes.forEach(([nom,cant,uni])=>{
-      const key = nom+'|'+uni;
-      map.set(key, (map.get(key)||0) + cant);
-    });
+    const m=MENUS.find(x=>x.id===id);
+    m.ing.forEach(([n,c,u])=>{ const k=n+'|'+u; map.set(k,(map.get(k)||0)+c); });
   });
-  const tbl = document.getElementById('tblCompras');
-  tbl.innerHTML = '<tr><th>Ingrediente</th><th>Cantidad</th><th>Unidad</th></tr>';
-  for(const [key,total] of map.entries()){
-    const [nom,uni] = key.split('|');
-    tbl.innerHTML += `<tr><td>${nom}</td><td>${total}</td><td>${uni}</td></tr>`;
-  }
-  if(map.size===0) tbl.innerHTML += `<tr><td colspan="3"><i>Aún no hay menús en el plan.</i></td></tr>`;
+  const tbl=document.getElementById('tbl'); tbl.innerHTML='<tr><th>Ingrediente</th><th>Cantidad</th><th>Unidad</th></tr>';
+  if(!map.size){ tbl.innerHTML+='<tr><td colspan="3"><i>Vacío</i></td></tr>'; return; }
+  for(const [k,tot] of map.entries()){ const [n,u]=k.split('|'); tbl.innerHTML+=`<tr><td>${n}</td><td>${tot}</td><td>${u}</td></tr>`; }
 }
-function clearPlan(){ state.plan={}; renderPlan(); renderCompras(); }
-
-// ----- Lonchera -----
-function renderSugs(){
-  const cont = document.getElementById('sugs');
-  cont.innerHTML='';
-  ['prot','carb','frut','lact'].forEach(cat=>{
-    SUGS[cat].forEach(item=>{
-      const b = document.createElement('button');
-      b.className = 'btn-muted'; b.textContent = item;
-      b.onclick = ()=>{ state.lunchbox[cat]=item; document.getElementById('slot-'+cat).textContent = item; };
-      cont.appendChild(b);
-    });
-  });
-}
-function saveLunchbox(){ alert('Lonchera guardada: '+Object.values(state.lunchbox).filter(Boolean).join(' + ')); }
-
-// ----- Perfil -----
-function savePrefs(){
-  state.prefs = {
-    alergias: pfAlergias.value || '—',
-    presupuesto: +pfPres.value || 0,
-    preferencias: pfPrefs.value || '—'
-  };
-  const out = document.getElementById('perfilOut');
-  out.innerHTML = `
-    <div>Alergias</div><div>${state.prefs.alergias}</div>
-    <div>Presupuesto semanal</div><div>S/ ${state.prefs.presupuesto}</div>
-    <div>Preferencias</div><div>${state.prefs.preferencias}</div>`;
-  alert('Preferencias guardadas.');
-}
-
-// Inicial
-goto('splash');
 </script>
-
-<style>
-#brandBtn{position:fixed;right:12px;bottom:64px;z-index:60;border-radius:50%;width:48px;height:48px}
-#brandPanel{position:fixed;right:12px;bottom:120px;z-index:61;background:#0e1522;border:1px solid #1b2a40;border-radius:14px;padding:12px;width:280px;display:none;color:#eaf1ff}
-#brandPanel label{display:block;font-size:12px;margin:6px 0 2px;color:#cfe1ff}
-#brandPanel input[type=color], #brandPanel input[type=text]{width:100%;padding:6px;border-radius:8px;border:1px solid #1b2a40;background:#0b1422;color:#eaf1ff}
-#brandPanel small{color:#9fb3d1}
-</style>
-<button id="brandBtn" class="btn-muted">⚙️</button>
-<div id="brandPanel">
-  <b>Branding</b><br>
-  <label>Nombre App</label><input id="brandName" placeholder="SaludCompare">
-  <label>Primary (#)</label><input id="brandPrimary" type="color" value="#0B63E5">
-  <label>Accent (#)</label><input id="brandAccent" type="color" value="#19A058">
-  <label>Fondo (#)</label><input id="brandBg" type="color" value="#0B111A">
-  <div style="display:flex;gap:8px;margin-top:8px">
-    <button class="btn-primary" id="brandSave">Guardar</button>
-    <button class="btn-muted" id="brandReset">Reset</button>
-  </div>
-  <small>Los cambios se guardan en este navegador (localStorage).</small>
-</div>
-<script>
-(function(){
-  const $ = s=>document.querySelector(s);
-  const meta = $('#themeColorMeta');
-  const btn = $('#brandBtn'), panel = $('#brandPanel');
-  btn.onclick = ()=> panel.style.display = panel.style.display==='none'?'block':'none';
-  const apply = (cfg)=>{
-    const root = document.documentElement;
-    if(cfg.primary) root.style.setProperty('--brand', cfg.primary);
-    if(cfg.accent) root.style.setProperty('--accent', cfg.accent);
-    if(cfg.bg) document.body.style.background = `linear-gradient(180deg, ${cfg.bg}, ${cfg.bg})`;
-    if(cfg.name) document.title = cfg.name + ' — Prototipo';
-    if(meta && cfg.primary) meta.setAttribute('content', cfg.primary);
-    const headerTitle = document.querySelector('header b');
-    if(headerTitle && cfg.name) headerTitle.textContent = cfg.name;
-  };
-  const load = ()=>{
-    try{ return JSON.parse(localStorage.getItem('sc_brand')||'{}'); }catch(_){ return {}; }
-  };
-  const save = (cfg)=> localStorage.setItem('sc_brand', JSON.stringify(cfg));
-  const cfg = load();
-  apply(cfg);
-  // init fields
-  $('#brandName').value = cfg.name || document.title.replace(' — Prototipo','');
-  $('#brandPrimary').value = cfg.primary || '#0B63E5';
-  $('#brandAccent').value = cfg.accent || '#19A058';
-  $('#brandBg').value = cfg.bg || '#0B111A';
-  $('#brandSave').onclick = ()=>{
-    const next = {
-      name: $('#brandName').value.trim() || 'SaludCompare',
-      primary: $('#brandPrimary').value,
-      accent: $('#brandAccent').value,
-      bg: $('#brandBg').value
-    };
-    save(next); apply(next); alert('Brand guardado.');
-  };
-  $('#brandReset').onclick = ()=>{
-    localStorage.removeItem('sc_brand'); location.reload();
-  };
-})();
-</script>
-
 </body>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
-}
-</script>
-
 </html>
